@@ -1,0 +1,196 @@
+.page {
+  padding: 2rem;
+  background: radial-gradient(circle at top left, #0a0a0a, #1a1a1a);
+  min-height: 100vh;
+  font-family: 'Orbitron', sans-serif;
+  color: #f1f1f1;
+  animation: fadeIn 1.2s ease-in;
+}
+
+.page h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #ff6600;
+  text-shadow: 0 0 10px rgba(255, 102, 0, 0.6);
+}
+
+.workout-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.workout-list li {
+  background-color: #111;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 102, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.workout-list li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(255, 102, 0, 0.3);
+}
+
+.workout-list strong {
+  font-size: 1.2rem;
+  color: #ff8533;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.actions button:first-child {
+  background-color: #3366ff;
+  color: #fff;
+}
+
+.actions button:first-child:hover {
+  background-color: #2a57e0;
+}
+
+.actions button:last-child {
+  background-color: #cc0000;
+  color: #fff;
+}
+
+.actions button:last-child:hover {
+  background-color: #b30000;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.edit-form {
+  background: #101820;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+  width: 100%;
+  max-width: 500px;
+  margin-top: 1rem;
+  animation: fadeIn 0.8s ease-in;
+  border-left: 5px solid #0099ff;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #eaf6ff;
+  color: #000;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.edit-form input:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 153, 255, 0.5);
+}
+
+.edit-form .actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.edit-form .actions button {
+  flex: 1;
+  padding: 0.75rem;
+  background: linear-gradient(to right, #0099ff, #007acc);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.edit-form .actions button:hover {
+  background: linear-gradient(to right, #33adff, #3399ff);
+  box-shadow: 0 0 15px rgba(0, 153, 255, 0.6);
+  transform: scale(1.03);
+}
+
+/* Animation reused */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delete-confirm {
+  background: #200f0f;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+  margin-top: 1rem;
+  animation: fadeIn 0.8s ease-in;
+  border-left: 5px solid #ff3333;
+  color: #fff;
+}
+
+.delete-confirm p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ff5555;
+}
+
+.delete-confirm .actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.delete-confirm .actions button {
+  flex: 1;
+  padding: 0.75rem;
+  background: linear-gradient(to right, #ff3333, #cc0000);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.delete-confirm .actions button:hover {
+  background: linear-gradient(to right, #ff4d4d, #e60000);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+  transform: scale(1.03);
+}
