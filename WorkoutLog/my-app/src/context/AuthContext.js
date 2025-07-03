@@ -22,7 +22,10 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const logout = () => signOut(auth);
+  const logout = () => {
+    signOut(auth);
+    localStorage.removeItem("userName");
+  };
 
   //This wraps the app with the AuthContext.Provider and passes down user and logout to child components
   return (

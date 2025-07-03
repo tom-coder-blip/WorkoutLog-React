@@ -19,17 +19,19 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password); //create a new account
-      const user = userCredential.user; //Firebase returns the new user object (user).
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
       // Save additional user info to Firestore
-      //each user will have their own uniquely identified document in the users collection.
       await setDoc(doc(db, "users", user.uid), {
         name,
         surname,
         email,
         createdAt: new Date()
       });
+
+      // Immediately save name to localStorage
+      localStorage.setItem("userName", name);
 
       navigate("/dashboard");
     } catch (error) {

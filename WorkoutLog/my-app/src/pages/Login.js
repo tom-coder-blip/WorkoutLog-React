@@ -1,24 +1,30 @@
-//Login page for React app that allows users to log in using their email and password
-
-import { useState } from "react"; 
-import { auth } from "../firebase/firebaseConfig";
+import { useState } from "react";
+import { auth, db } from "../firebase/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom"; // lets you redirect the user to another page (e.g. /dashboard).
-import "../styles/Auth.css"; 
+import { doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import "../styles/Auth.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState(""); // New: name field
-  const navigate = useNavigate(); // lets you redirect the user to another page after login. Navigates to ("/dashboard").
+  const navigate = useNavigate();
 
-  //This function runs when the user clicks the Login button.
   const handleLogin = async (e) => {
-    e.preventDefault(); //stops the page from refreshing.
+    e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // Optionally store name in localStorage or context if needed
-      localStorage.setItem("userName", name);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Fetch user data from Firestore
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        localStorage.setItem("userName", userData.name); // Save actual registered name
+      } else {
+        console.error("User document not found in Firestore.");
+      }
+
       navigate("/dashboard");
     } catch (error) {
       alert(error.message);
@@ -29,13 +35,6 @@ export default function Login() {
     <div className="auth-container">
       <form onSubmit={handleLogin} className="auth-form">
         <h2>Login</h2>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          required
-        />
         <input
           type="email"
           placeholder="Email"
@@ -55,4 +54,3 @@ export default function Login() {
     </div>
   );
 }
-

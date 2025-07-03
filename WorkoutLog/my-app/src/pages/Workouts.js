@@ -1,14 +1,16 @@
 //Fetches workouts from the Firebase Firestore database.
 
 import { useEffect, useState } from "react";
-import { db } from "../firebase/firebaseConfig";
+import { db, auth } from "../firebase/firebaseConfig";
 import {
   collection,
   getDocs,
   deleteDoc,
   doc,
   updateDoc,
-} from "firebase/firestore"; //these functions from firebase allow us to fetch, edit and delete documents from firestore database
+  query,
+  where
+} from "firebase/firestore";
 import Navbar from "../components/Navbar";
 import "../styles/Workouts.css";
 
@@ -24,7 +26,16 @@ export default function Workouts() {
 
   //Fetches all workouts from the "workouts" collection in Firestore.
   const fetchWorkouts = async () => {
-    const querySnapshot = await getDocs(collection(db, "workouts"));
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("User not logged in.");
+      return;
+    }
+
+    const workoutsRef = collection(db, "workouts");
+    const q = query(workoutsRef, where("userId", "==", user.uid)); // only fetch workouts for logged-in user
+
+    const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
