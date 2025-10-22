@@ -50,3 +50,19 @@
     transform: translateY(0);
   }
 }
+
+.delete-button {
+  background-color: #e63946;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Orbitron', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #d62828;
+}
